@@ -1,0 +1,39 @@
+<div style="background-color: white;">
+	<h2 class="w-100 text-center py-2">Star Wars Creatures</h2>
+	<table class="table table-hover mx-auto">
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Class</th>
+				<th scope="col">Design</th>
+				<th scope="col" class="text-center">Height (cm)</th>
+				<th scope="col">Skin</th>
+				<th scope="col">Hair</th>
+				<th scope="col">Eyes</th>
+				<th scope="col" class="text-center">Lifespan (years)</th>
+				<th scope="col">Language</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let creature of creatures; trackBy: trackByName">
+				<td>{{ creature.name }}</td>
+				<td>{{ creature.classification }}</td>
+				<td>{{ creature.designation }}</td>
+				<td class="text-center">{{ creature.average_height }}</td>
+				<td>{{ creature.skin_colors }}</td>
+				<td>{{ creature.hair_colors }}</td>
+				<td>{{ creature.eye_colors }}</td>
+				<td class="text-center">{{ creature.average_lifespan }}</td>
+				<td>{{ creature.language }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<ul class="row justify-content-end pagination">
+		<li class="page-item" [class.disabled]="page==1">
+			<a class="page-link" href="#" (click)="page=page-1; fetchCreatures();">Previous</a>
+		</li>
+		<li class="page-item" [class.disabled]="page==maxpage || maxpage==0">
+			<a class="page-link" href="#" (click)="page=page+1; fetchCreatures();">Next</a>
+		</li>
+	</ul>
+</div>
