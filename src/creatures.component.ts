@@ -10,9 +10,9 @@ import { Creature } from './creature';
 
 export class CreaturesComponent implements OnInit
 {
-	creatures: Creature[]=null;
+	creatures: Creature[]=null; favored=new Set();
 	page: number=1; maxpage: number=0;
-	favored=new Set();
+	errorText: string=null; fetching: boolean=false;
 	
 	constructor(private service: StarWarsService) { }
 	ngOnInit() { this.fetchCreatures(); }
@@ -21,13 +21,15 @@ export class CreaturesComponent implements OnInit
 	{ return creature.name; }
 	
 	fetchCreatures()
-	{ 
+	{
+		this.fetching=true;
 		this.service.getCreatures(this.page,data=>
 		{
 			this.creatures=data.results;
 			if (this.maxpage==0)
-				this.maxpage=data.count/data.results.length+1;
-		},null);
+				this.maxpage=Math.ceil(data.count/data.results.length);
+			this.fetching=false;
+		},error=>this.errorText=error);
 	}
 	
 	dataRowClicked(creatureName: string)

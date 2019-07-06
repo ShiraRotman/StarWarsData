@@ -29,12 +29,16 @@
 			</tr>
 		</tbody>
 	</table>
-	<ul class="row justify-content-end pagination">
-		<li class="page-item" [class.disabled]="page==1">
+	<ul class="row justify-content-end pagination mr-1">
+		<li class="page-item" [class.disabled]="page==1 || fetching || error!=null">
 			<a class="page-link" href="#" (click)="page=page-1; fetchCreatures();">Previous</a>
 		</li>
-		<li class="page-item" [class.disabled]="page==maxpage || maxpage==0">
+		<li class="page-item" [class.disabled]="page==maxpage || maxpage==0 || fetching || error!=null">
 			<a class="page-link" href="#" (click)="page=page+1; fetchCreatures();">Next</a>
 		</li>
 	</ul>
+	<p class="alert alert-danger" [hidden]="errorText==null">
+		There was a problem fetching the data. Please refresh the page to try again.<br/>
+		{{ errorText }}
+	</p>
 </div>
