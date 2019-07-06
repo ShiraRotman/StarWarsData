@@ -14,8 +14,9 @@
 				<th scope="col">Language</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr *ngFor="let creature of creatures; trackBy: trackByName">
+		<tbody style="cursor: pointer;">
+			<tr *ngFor="let creature of creatures; trackBy: trackByName" (click)="dataRowClicked(creature.name)"
+				[class.table-info]="favored.has(creature.name)">
 				<td>{{ creature.name }}</td>
 				<td>{{ creature.classification }}</td>
 				<td>{{ creature.designation }}</td>

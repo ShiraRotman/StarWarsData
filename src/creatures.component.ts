@@ -12,6 +12,7 @@ export class CreaturesComponent implements OnInit
 {
 	creatures: Creature[]=null;
 	page: number=1; maxpage: number=0;
+	favored=new Set();
 	
 	constructor(private service: StarWarsService) { }
 	ngOnInit() { this.fetchCreatures(); }
@@ -27,5 +28,11 @@ export class CreaturesComponent implements OnInit
 			if (this.maxpage==0)
 				this.maxpage=data.count/data.results.length+1;
 		},null);
+	}
+	
+	dataRowClicked(creatureName: string)
+	{
+		if (this.favored.has(creatureName)) this.favored.delete(creatureName);
+		else this.favored.add(creatureName);
 	}
 }
