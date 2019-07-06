@@ -16,6 +16,9 @@ export class CreaturesComponent implements OnInit
 	constructor(private service: StarWarsService) { }
 	ngOnInit() { this.fetchCreatures(); }
 	
+	trackByName(index: number,creature: Creature): string 
+	{ return creature.name; }
+	
 	fetchCreatures()
 	{ 
 		this.service.getCreatures(this.page,data=>
